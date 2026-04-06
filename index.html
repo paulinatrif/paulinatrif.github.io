@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paulina Trifonova</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f7f6f3;
+      --text: #1a1a1a;
+      --text-secondary: #555550;
+      --text-tertiary: #999990;
+      --border: rgba(0,0,0,0.1);
+      --border-secondary: rgba(0,0,0,0.18);
+      --accent: #1a4f8a;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a1a;
+        --bg-secondary: #242424;
+        --text: #f0ede8;
+        --text-secondary: #aaa9a3;
+        --text-tertiary: #666660;
+        --border: rgba(255,255,255,0.1);
+        --border-secondary: rgba(255,255,255,0.18);
+        --accent: #6fa3d8;
+      }
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    .pt {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-bottom: 1.75rem;
+      border-bottom: 0.5px solid var(--border);
+      margin-bottom: 3rem;
+    }
+
+    .nav-name {
+      font-family: 'EB Garamond', serif;
+      font-size: 18px;
+      color: var(--text);
+    }
+
+    .nav-links { display: flex; gap: 1.5rem; }
+
+    .nav-links a {
+      font-size: 12px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--text); }
+
+    .sec { display: none; }
+    .sec.on { display: block; animation: fi 0.2s ease; }
+
+    @keyframes fi {
+      from { opacity: 0; transform: translateY(5px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-family: 'EB Garamond', serif;
+      font-size: 40px;
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+      color: var(--text);
+    }
+
+    h2 {
+      font-family: 'EB Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 0.2rem;
+      color: var(--text);
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 0.6rem;
+    }
+
+    .bio {
+      font-size: 15px;
+      color: var(--text-secondary);
+      max-width: 540px;
+      line-height: 1.85;
+      margin-bottom: 2.5rem;
+    }
+
+    hr {
+      border: none;
+      border-top: 0.5px solid var(--border);
+      margin: 2rem 0;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 0.5px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .info-cell { background: var(--bg); padding: 0.9rem 1.1rem; }
+
+    .info-cell .lbl {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 0.25rem;
+    }
+
+    .info-cell .val { font-size: 13px; color: var(--text); }
+
+    .pub {
+      padding: 1.25rem 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .pub:first-of-type { border-top: 0.5px solid var(--border); }
+
+    .pub-title { font-size: 14px; font-weight: 500; margin-bottom: 0.25rem; line-height: 1.5; }
+
+    .pub-authors { font-size: 13px; color: var(--text-secondary); margin-bottom: 0.2rem; }
+
+    .pub-venue { font-size: 12px; color: var(--text-tertiary); font-style: italic; margin-bottom: 0.4rem; }
+
+    .pub-link { font-size: 12px; color: var(--accent); text-decoration: none; letter-spacing: 0.02em; }
+    .pub-link:hover { text-decoration: underline; }
+
+    .cv-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      border-bottom: 0.5px solid var(--border);
+      padding-bottom: 0.4rem;
+      margin: 2rem 0 1.25rem;
+    }
+
+    .cv-item { margin-bottom: 1.5rem; }
+
+    .cv-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .cv-title { font-size: 14px; font-weight: 500; }
+
+    .cv-date { font-size: 12px; color: var(--text-tertiary); white-space: nowrap; flex-shrink: 0; }
+
+    .cv-place { font-size: 13px; color: var(--text-secondary); font-style: italic; margin-bottom: 0.3rem; }
+
+    .cv-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+    .cv-desc li { margin-left: 1.1rem; margin-bottom: 0.15rem; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 0.5rem; }
+
+    .tag {
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 100px;
+      border: 0.5px solid var(--border-secondary);
+      color: var(--text-secondary);
+    }
+
+    .contact-list {
+      border: 0.5px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .c-row {
+      display: flex;
+      align-items: center;
+      padding: 0.9rem 1.25rem;
+      border-bottom: 0.5px solid var(--border);
+      background: var(--bg);
+    }
+
+    .c-row:last-child { border-bottom: none; }
+
+    .c-lbl {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      width: 80px;
+      flex-shrink: 0;
+    }
+
+    .c-val { font-size: 14px; color: var(--text-secondary); }
+    .c-val a { color: var(--accent); text-decoration: none; }
+    .c-val a:hover { text-decoration: underline; }
+
+    .subtitle { font-size: 13px; color: var(--text-tertiary); margin-bottom: 2rem; }
+
+    @media (max-width: 480px) {
+      .info-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 32px; }
+      nav { flex-direction: column; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="pt">
+  <nav>
+    <span class="nav-name">Paulina Trifonova</span>
+    <div class="nav-links">
+      <a class="active" onclick="show('about',this)">About</a>
+      <a onclick="show('cv',this)">CV</a>
+      <a onclick="show('contact',this)">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ABOUT -->
+  <div id="about" class="sec on">
+    <p class="eyebrow">PhD Student · Tufts University</p>
+    <h1>Paulina Trifonova</h1>
+    <p class="bio">I am a PhD student in Computer Science at Tufts University, advised by Diane Souvaine. My research interests lie in computational geometry and computational biology. I completed my undergraduate degree in Computer Science and Mathematics at Swarthmore College.</p>
+
+    <div class="info-grid">
+      <div class="info-cell"><div class="lbl">Affiliation</div><div class="val">Tufts University</div></div>
+      <div class="info-cell"><div class="lbl">Advisor</div><div class="val">Diane Souvaine</div></div>
+      <div class="info-cell"><div class="lbl">Interests</div><div class="val">Comp. geometry, comp. biology</div></div>
+    </div>
+
+    <hr>
+
+    <p class="eyebrow" style="margin-bottom:1rem;">Publications</p>
+
+    <div class="pub">
+      <div class="pub-title">Combinatorial games played randomly: Chomp and nim</div>
+      <div class="pub-authors">Pat Devlin &amp; Paulina Trifonova</div>
+      <div class="pub-venue">arXiv preprint, 2024</div>
+      <a class="pub-link" href="https://doi.org/10.48550/arXiv.2401.16670" target="_blank">doi:10.48550/arXiv.2401.16670 ↗</a>
+    </div>
+
+    <div class="pub">
+      <div class="pub-title">Misinformation, Fraud, and Stereotyping: Towards a Typology of Harm Caused by Deepfakes</div>
+      <div class="pub-authors">Paulina Trifonova &amp; Sukrit Venkatagiri</div>
+      <div class="pub-venue">CSCW Companion '24 · San Jose, Costa Rica · ACM, 2024</div>
+      <a class="pub-link" href="https://doi.org/10.1145/3678884.3685938" target="_blank">doi:10.1145/3678884.3685938 ↗</a>
+    </div>
+  </div>
+
+  <!-- CV -->
+  <div id="cv" class="sec">
+    <h2>Curriculum vitae</h2>
+    <p class="subtitle">Education, research, teaching, and skills</p>
+
+    <div class="cv-label">Education</div>
+
+    <div class="cv-item">
+      <div class="cv-row"><span class="cv-title">Tufts University</span><span class="cv-date">2025 – present</span></div>
+      <div class="cv-place">PhD, Computer Science</div>
+      <div class="cv-desc">Advised by Diane Souvaine. Research in computational geometry and computational biology.</div>
+    </div>
+
+    <div class="cv-item">
+      <div class="cv-row"><span class="cv-title">Swarthmore College</span><span class="cv-date">2021 – 2025</span></div>
+      <div class="cv-place">B.A., Computer Science and Mathematics · GPA: 3.74</div>
+    </div>
+
+    <div class="cv-label">Research Experience</div>
+
+    <div class="cv-item">
+      <div class="cv-row"><span class="cv-title">Research Assistant — HCI / Deepfakes</span><span class="cv-date">2021 – 2025</span></div>
+      <div class="cv-place">Collective Resilience Lab, Swarthmore CS (advisor: Sukrit Venkatagiri)</div>
+      <ul class="cv-desc">
+        <li>Systematically collated and classified 536 real-world deepfake incidents across 54 countries and 31 months.</li>
+        <li>Published at CSCW 2024; presented poster at Swarthmore Sigma Xi Poster Session.</li>
+      </ul>
+    </div>
+
+    <div class="cv-item">
+      <div class="cv-row"><span class="cv-title">Research Assistant — Combinatorics</span><span class="cv-date">May – Aug 2023</span></div>
+      <div class="cv-place">Swarthmore Math Department (advisor: Pat Devlin)</div>
+      <ul class="cv-desc">
+        <li>Researched combinatorial game theory; co-authored arXiv preprint on Chomp and Nim.</li>
+        <li>Presented findings at Swarthmore Sigma Xi Poster Session.</li>
+      </ul>
+    </div>
+
+    <div class="cv-item">
+      <div class="cv-row"><span class="cv-title">Research Assistant — CS Education</span><span class="cv-date">Jan – May 2023</span></div>
+      <div class="cv-place">Swarthmore CS Department (advisors: Kevin Webb, Tia Newhall)</div>
+      <ul class="cv-desc">
+        <li>Designed practice exercises in PreTeXT for the <em>Dive Into Systems</em> online textbook.</li>
+      </ul>
+    </div>
+
+    <div class="cv-label">Teaching</div>
+
+    <div class="cv-item">
+      <div class="cv-row"><span class="cv-title">TA — CS10: Intro to Computer Science</span><span class="cv-date">Tufts, 2025–26</span></div>
+    </div>
+    <div class="cv-item">
+      <div class="cv-row"><span class="cv-title">TA — CS135: Machine Learning</span><span class="cv-date">Tufts, 2025–26</span></div>
+    </div>
+    <div class="cv-item">
+      <div class="cv-row"><span class="cv-title">TA — CS60: Discrete Mathematics</span><span class="cv-date">Tufts, Summer 2026</span></div>
+    </div>
+    <div class="cv-item">
+      <div class="cv-row"><span class="cv-title">TA — Intro to Computer Systems (Ninja)</span><span class="cv-date">Swarthmore, Spring 2023</span></div>
+      <div class="cv-desc">Weekly three-hour study sessions; prepared lab solution presentations.</div>
+    </div>
+    <div class="cv-item">
+      <div class="cv-row"><span class="cv-title">TA — Calculus, Linear Algebra, Discrete Math</span><span class="cv-date">Swarthmore, 2023–24</span></div>
+      <div class="cv-desc">Three semesters of weekly study sessions across calculus, linear algebra, and discrete math. Peer Tutor Certified.</div>
+    </div>
+
+    <div class="cv-label">Awards</div>
+    <div class="cv-item">
+      <ul class="cv-desc">
+        <li>Frances Velay Women's Science Research Fellowship</li>
+        <li>Swarthmore College Summer Research Fellowship</li>
+        <li>Lang Center Faculty Lead Engaged Research Grant</li>
+      </ul>
+    </div>
+
+    <div class="cv-label">Skills</div>
+    <div class="tags">
+      <span class="tag">Python</span>
+      <span class="tag">C / C++</span>
+      <span class="tag">Java</span>
+      <span class="tag">R</span>
+      <span class="tag">SQL</span>
+      <span class="tag">HTML / CSS</span>
+      <span class="tag">LaTeX</span>
+      <span class="tag">MATLAB</span>
+      <span class="tag">Bulgarian (native)</span>
+      <span class="tag">Spanish</span>
+      <span class="tag">Russian</span>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div id="contact" class="sec">
+    <h2>Contact</h2>
+    <p class="subtitle">Feel free to get in touch.</p>
+    <div class="contact-list">
+      <div class="c-row">
+        <span class="c-lbl">Email</span>
+        <span class="c-val"><a href="mailto:paulina.o.trifonova@gmail.com">paulina.o.trifonova@gmail.com</a></span>
+      </div>
+      <div class="c-row">
+        <span class="c-lbl">LinkedIn</span>
+        <span class="c-val"><a href="https://www.linkedin.com/in/paulina-trifonova-9a7834270/" target="_blank">linkedin.com/in/paulina-trifonova-9a7834270</a></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function show(id, el) {
+    document.querySelectorAll('.sec').forEach(s => s.classList.remove('on'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById(id).classList.add('on');
+    el.classList.add('active');
+  }
+</script>
+</body>
+</html>
